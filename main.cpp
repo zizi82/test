@@ -1,35 +1,28 @@
 #include <QCoreApplication>
 #include<iostream>
-#include<fstream>
 #include<string>
-//#include<bits.h>
+#include<fstream>
+#include<QString>
+#include<QStringList>
+#define user_table "users.txt"
 using namespace std;
-#define user_table_file "users.txt"
 
-//class registeration{
-//public:
-//   string username;
-//   long long password;
-//   void adduser();
-//};
-//registeration :: adduser(string username,long long password){
-//    ifstream std_file (user_table_file);
-//        if(std_file.is_open()){
 
-//        }
-//    cout << "Enter your username : ";
-//    getline(cin,username);
-//    cout << "Enter your password : ";
-//    cin >> password;
-//};
+class registeration{
+private:
+    string username;
+    string password;
+public:
+   void adduser();
+};
 void password_difficulty(string password){
 
     long pass_len = password.length();
     while (true) {
         if((pass_len>=6) && (pass_len<=10))
             break;
-        cout << "Try again! Your password should be between 6 and 10." << endl;
-        cin >> password;
+        cout << "Try again! Your password should be between 6 and 10 characters." << endl;
+        getline(cin,password);
 
     }
     bool upper = false , lower = false , specialchar = false, digit = false;
@@ -48,34 +41,42 @@ void password_difficulty(string password){
         }
 
     }
-    if((upper || lower)&& specialchar && digit && (pass_len >=8))
+    if((upper || lower)&& specialchar && digit && (pass_len>=8))
         cout << "Your password is strong ."<< endl;
     else if((upper || lower)&&(digit|| specialchar) && (pass_len<=8))
         cout << "Your password is average ." << endl;
     else
-        cout << "Your password is weak. You should change your password !"<<endl;
+        cout << "Your password is weak!"<<endl;
 
 }
-//void get_password(){
-//    string password;
-//    long pass_len = password.length();
-//    cout << "Length of password should be between 6 and 10 ." << endl;
-//    while (true) {
-//        cin >> password;
-//        if((pass_len>=6) && (pass_len<=10))
-//            break;
-//        cout << "Try again! Your password should be between 6 and 10." << endl;
+void registeration::adduser(){
+    ifstream user(user_table, ios::app);
+    if(!user){
+        cout<<"error file"<<endl;
+        return;
+    }
 
-//    }
-//    password_difficulty(password,pass_len);
+    else
+    {
+        cout << "Enter your username : ";
+        getline(cin,username);
+        user >> username;
+        cout <<"Enter your password :"<<endl;
+        cout << "Length of password should be between 6 and 10 characters ." << endl;
+        getline(cin,password);
+        user >> password;
+        password_difficulty(password);
+        user.close();
+    }
 
-//}
+};
+
+
+
 int main()
 {
-    cout << "Length of password should be between 6 and 10 ." << endl;
-    string password;
-    cin >> password;
-    password_difficulty(password);
+    registeration user1;
+    user1.adduser();
 
     return 0;
 }
