@@ -14,6 +14,7 @@ private:
     string password;
 public:
    void adduser();
+   void checkusername();
 };
 void password_difficulty(string password){
 
@@ -50,28 +51,32 @@ void password_difficulty(string password){
 
 }
 void registeration::adduser(){
-    ifstream user(user_table, ios::app);
-    if(!user){
-        cout<<"error file"<<endl;
-        return;
-    }
 
-    else
-    {
         cout << "Enter your username : ";
         getline(cin,username);
-        user >> username;
         cout <<"Enter your password :"<<endl;
         cout << "Length of password should be between 6 and 10 characters ." << endl;
         getline(cin,password);
-        user >> password;
         password_difficulty(password);
-        user.close();
-    }
 
 };
 
+//void registeration :: checkusername(){
+//    string tempuser;
+//    fstream user(user_table,ios::out|ios::in|ios::app);
+//    if(user.good()){
+//        do{
+//            getline(cin,username);
+//            cin.sync();
+//            while (!user.eof()){
+//                getline(username,tempuser,';');
+//                if(tempuser==username)
+//                    cout<<"username exsists, please select a new username: "<<endl;
+//            }
 
+//        }
+//    }
+//}
 
 int main()
 {
