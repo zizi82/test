@@ -1,29 +1,22 @@
 #ifndef HOME_H
 #define HOME_H
 #include<iostream>
-#include"user-pass.h"
 #include<map>
 using namespace std;
 
 enum commands{
     _guest_entry,
-    _admin_entry,
+    _help,
     _setting,
     _registeration,
-    _bad_command
+    _sign_in,
+    _bad_command,
+    _quit,
+    _jadval
 };
 
 
-void wellcome_message()
-{
-    cout << " ----------------------------------------------\n"
-            "|                 Welcome                     |\n"
-            "|               Puzzle game                   |\n"
-            "|                                             |\n"
-            "|    guest                     for guest entry|\n"
-            "|    admin                     for admin entry|\n"
-            "|    setting                   go to setting  |\n"
-            "|    registeration             to register    |\n"
-            " ----------------------------------------------\n" ;
-}
+commands get_commands();
+void wellcome_message();
+void setting();
 #endif // HOME_H
