@@ -103,7 +103,6 @@ void z_user::login()
             s5 = x.second;
         }
     }
-    cout<<s5.password<<endl;
     cout << "enter password: " << endl;
     getline(cin,password);
     if(password != s5.password){
